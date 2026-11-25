@@ -22,13 +22,13 @@ Fit these four candidate mechanisms; substrate inhibition is present in the deno
 - `uncompetitive`: use (S(1+I/K_{iu})), with the Km term simply (K_m).
 - `mixed`: include both inhibitor terms.
 
-Here S is substrate in mM, I is inhibitor in uM, Vmax is mM/min, Km and Ksi are mM, and Kic and Kiu are uM. For each model calculate RSS on all corrected progress-curve observations and AICc = n*ln(RSS/n) + 2*k + 2*k*(k+1)/(n-k-1), where n is the number of progress-curve observations and k is the number of fitted parameters. Select the model with the lowest AICc. Use it to predict the initial rate at each challenge condition.
+Here S is substrate in mM, I is inhibitor in uM, Vmax is mM/min, Km and Ksi are mM, and Kic and Kiu are uM. For each model minimize the residual sum of squares (RSS) over all corrected progress-curve observations and report that RSS and AICc = n*ln(RSS/n) + 2*k + 2*k*(k+1)/(n-k-1), where n is the number of progress-curve observations and k is the number of fitted parameters. Select the model with the lowest AICc. Use it to predict the initial rate at each challenge condition. Report computed values at full precision. The challenge rates must achieve an RMSE of at most 0.008 mM/min and a maximum absolute error of at most 0.015 mM/min.
 
 Write valid JSON to `/app/results/mechanism_fit.json` with the schema below. Include both plate calibration fits, all four model fits, and exactly one prediction for every challenge condition ID. Every numeric value must be finite.
 
 ```json
 {
-  "selected_model": "mixed",
+  "selected_model": "<model key>",
   "plate_calibration": {
     "plate_A": {"slope": 0.0, "intercept": 0.0, "blank_drift": 0.0},
     "plate_B": {"slope": 0.0, "intercept": 0.0, "blank_drift": 0.0}
@@ -43,4 +43,6 @@ Write valid JSON to `/app/results/mechanism_fit.json` with the schema below. Inc
 }
 ```
 
-Create the output directory if needed. You have 28800 seconds to complete this task
+Create the output directory if needed.
+
+You have 28800 seconds to complete this task. Do not cheat by using online solutions or hints specific to this task.

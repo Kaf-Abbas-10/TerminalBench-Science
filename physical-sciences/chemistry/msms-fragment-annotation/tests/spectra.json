@@ -6,7 +6,7 @@
   ],
   "spectra": [
     {
-      "record_id": "MSBNK-Eawag-EQ01152501", "compound_label": "unknown A",
+      "record_id": "record-a", "compound_label": "unknown A",
       "precursor_formula": "C8H10NO5S+", "precursor_mz": 232.0274,
       "ion_mode": "positive", "collision_energy": "15% nominal HCD",
       "source_license": "CC BY-SA", "peaks": [
@@ -15,7 +15,7 @@
       ]
     },
     {
-      "record_id": "MSBNK-Eawag-EQ01152502", "compound_label": "unknown A",
+      "record_id": "record-b", "compound_label": "unknown A",
       "precursor_formula": "C8H10NO5S+", "precursor_mz": 232.0274,
       "ion_mode": "positive", "collision_energy": "30% nominal HCD",
       "source_license": "CC BY-SA", "peaks": [
@@ -25,7 +25,7 @@
       ]
     },
     {
-      "record_id": "MSBNK-Eawag-EA024301", "compound_label": "candidate reference",
+      "record_id": "record-c", "compound_label": "candidate reference",
       "precursor_formula": "C8H10NO2+", "precursor_mz": 152.0706,
       "ion_mode": "positive", "collision_energy": "35% nominal CID",
       "source_license": "CC BY", "peaks": [
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "record_id": "MSBNK-Athens_Univ-AU276706", "compound_label": "candidate reference",
+      "record_id": "record-d", "compound_label": "candidate reference",
       "precursor_formula": "C8H10NO2+", "precursor_mz": 152.0706,
       "ion_mode": "positive", "collision_energy": "ramp 16.3-24.4 eV",
       "source_license": "CC BY", "peaks": [

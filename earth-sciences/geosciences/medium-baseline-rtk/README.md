@@ -3,12 +3,12 @@
 
 # medium-baseline-rtk
 
-Build a reusable dual-frequency GPS kinematic RTK solver that resolves carrier-phase integer ambiguities on 5-20 km baselines from raw RINEX observations.
+Build a reusable dual-frequency GPS kinematic RTK solver that achieves carrier-phase precision on 5-20 km baselines from raw RINEX observations.
 
 | | |
 |---|---|
-| **Author** | Your Name (Independent Researcher) — your@email.com |
-| **Profile** | TODO: author Google Scholar, LinkedIn or personal page URL |
+| **Author** | Kaf Abbas (QuantX) — kafabbas10@gmail.com |
+| **Profile** | https://www.linkedin.com/in/kaf-abbas-16839b28a |
 | **Domain** | earth-sciences / geosciences / geodesy |
 | **Tags** | `gnss` `rtk` `carrier-phase` `integer-ambiguity-resolution` `geodesy` |
 | **Expert time estimate** | 16 hours |
@@ -19,7 +19,7 @@ See [instruction.md](instruction.md) for the task as the agent receives it, and 
 
 ## Author's relevant experience
 
-TODO: one or two sentences on the author's professional GNSS / geodesy background.
+4+ years of relevant experience.
 
 <!-- END MANAGED HEADER -->
 
@@ -38,6 +38,8 @@ The data are synthetic but physically complete: broadcast-ephemeris orbits with 
 `solution/solver.py` is a dual-frequency double-difference extended Kalman filter, written from scratch. Its states are rover position (re-initialised from iono-free code positioning each epoch), relative zenith wet delay, a common vertical differential ionosphere mapped to each line of sight plus per-satellite residuals, and single-difference L1/L2 ambiguities. Slips are detected from loss-of-lock flags, arc gaps, geometry-free jumps and Doppler-predicted phase. The prediction is integrated over the true sampling interval (corrected for receiver-clock resets), and the common clock term is removed by the cross-satellite median. Ambiguity resolution is cascaded. LAMBDA first fixes and holds the double-difference wide-lanes; it then resolves L1/L2 jointly with a ratio test and partial fixing that drops low satellites. Each fix is validated by its phase residuals and by consistency with the float solution, and the filter holds the integers after ten consecutive validated fixes. The key insight is that once the wide-lane is integer, the ionosphere prior pins the narrow-lane within a few epochs.
 
 ## Verification
+
+The verifier uses the `fixed` labels supplied by the solver to calculate fix-rate and integrity metrics. It checks those positions against the known trajectory. The CSV carries the solver's classification and the estimated positions.
 
 The verifier image contains four hidden sessions (alder, basalt, cedar, dune; 30 min at 1 Hz, about 1790 rover epochs each) and their true rover trajectories. For each session it copies only the four documented input files and the submitted `solver.py` into a fresh sandbox. It runs the solver as uid 65534 with a 600 s limit and no network, while `/tests` and `/logs/verifier` are readable only by root. It then checks `solution.csv`: the exact header, one row per rover epoch in order with matching week and time tag, finite coordinates, and a status of `fixed` or `float`. It grades four outcomes against the true antenna position at signal reception: fix rate at least 0.75; wrong fixes (fixed epochs more than 0.10 m away in 3-D) at most 1% of fixed epochs; median 3-D error of fixed epochs at most 0.04 m; and 95th-percentile 3-D error over all epochs at most 0.50 m. That makes 20 pytest cases (format plus four metrics, per session). The reward is 1 only if all pass.
 

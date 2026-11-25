@@ -21,7 +21,7 @@ field = "chemistry"
 subfield = "analytical chemistry; tandem mass spectrometry"
 tags = ["mass spectrometry", "MS/MS", "formula assignment", "fragmentation chemistry"]
 expert_time_estimate_hours = 4.0
-relevant_experience = "AUTHOR: provide a truthful one-sentence description of relevant scientific experience before publication."
+relevant_experience = "4+ years of relevant experience."
 conflicts_of_interest = "None"
 
 [verifier]
@@ -44,4 +44,4 @@ cpus = 1
 memory_mb = 2048
 storage_mb = 10240
 gpus = 0
-network_mode = "no-network"
+network_mode = "public"

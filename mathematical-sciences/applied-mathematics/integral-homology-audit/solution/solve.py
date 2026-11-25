@@ -17,10 +17,6 @@ def identity(size):
     return result
 
 
-def shape(matrix):
-    return len(matrix), (len(matrix[0]) if matrix else 0)
-
-
 def row_swap(matrix, i, j):
     matrix[i], matrix[j] = matrix[j], matrix[i]
 
@@ -43,9 +39,9 @@ def row_negate(matrix, i):
     matrix[i] = [-x for x in matrix[i]]
 
 
-def smith_with_witness(matrix):
+def smith_with_witness(matrix, column_count):
     """Return D,U,V with U*A*V=D, using only integer elementary operations."""
-    m, n = shape(matrix)
+    m, n = len(matrix), column_count
     a = [list(map(int, row)) for row in matrix]
     u, v = identity(m), identity(n)
     pivot_index = 0
@@ -172,14 +168,14 @@ def verify_chain(boundaries, ranks):
 
 def solve_one(complex_data):
     ranks = complex_data.get("ranks")
-    if not isinstance(ranks, list) or not ranks or any(not isinstance(n, int) or n <= 0 for n in ranks):
-        raise ValueError("ranks must be a nonempty list of positive integers")
+    if not isinstance(ranks, list) or not ranks or any(type(n) is not int or n < 0 for n in ranks):
+        raise ValueError("ranks must be a nonempty list of nonnegative integers")
     degree_max = len(ranks) - 1
     boundaries = {k: boundary_for(complex_data, k) for k in range(1, degree_max + 1)}
     verify_chain(boundaries, ranks)
     certificates = {}
     for k, matrix in boundaries.items():
-        diagonal_matrix, left, right, diagonal = smith_with_witness(matrix)
+        _, left, right, diagonal = smith_with_witness(matrix, ranks[k])
         certificates[str(k)] = {
             "diagonal": diagonal,
             "left_transform": left,

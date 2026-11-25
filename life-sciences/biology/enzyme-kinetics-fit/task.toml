@@ -21,7 +21,7 @@ field = "biology"
 subfield = "enzymology"
 tags = ["enzyme kinetics", "inhibitor mechanism", "assay calibration", "model selection"]
 expert_time_estimate_hours = 4.0
-relevant_experience = "AUTHOR: add a sentence describing relevant scientific experience."
+relevant_experience = "4+ years of relevant experience."
 conflicts_of_interest = "None"
 
 [verifier]

@@ -18,7 +18,6 @@ from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
-import pytest
 
 SOLVER = Path("/root/results/solver.py")
 SESSIONS_DIR = Path("/tests/sessions")
@@ -170,35 +169,45 @@ def graded(name: str):
     return m
 
 
-@pytest.mark.parametrize("name", SESSIONS)
-def test_solution_format(name):
+def check_solution_format(name):
     """solution.csv exists, has the documented header, one row per rover epoch in order, finite values."""
     graded(name)
 
 
-@pytest.mark.parametrize("name", SESSIONS)
-def test_fix_rate(name):
-    """At least 75% of the rover epochs carry an integer-fixed solution."""
+def check_fix_rate(name):
+    """At least 75% of rover epochs are declared fixed."""
     m = graded(name)
     assert m["fix_rate"] >= MIN_FIX_RATE, f"fix rate {m['fix_rate']:.3f} < {MIN_FIX_RATE}"
 
 
-@pytest.mark.parametrize("name", SESSIONS)
-def test_fixed_integrity(name):
+def check_fixed_integrity(name):
     """At most 1% of fixed epochs lie more than 0.10 m (3-D) from the true rover position."""
     m = graded(name)
     assert m["wrong_frac"] <= MAX_WRONG_FIX_FRAC, f"wrong-fix fraction {m['wrong_frac']:.4f} > {MAX_WRONG_FIX_FRAC}"
 
 
-@pytest.mark.parametrize("name", SESSIONS)
-def test_fixed_precision(name):
+def check_fixed_precision(name):
     """Median 3-D error of the fixed epochs is at most 0.04 m."""
     m = graded(name)
     assert m["fixed_median"] <= MAX_FIXED_MEDIAN_M, f"fixed median error {m['fixed_median']:.4f} m > {MAX_FIXED_MEDIAN_M}"
 
 
-@pytest.mark.parametrize("name", SESSIONS)
-def test_overall_accuracy(name):
+def check_overall_accuracy(name):
     """95th percentile of the 3-D error over all epochs (fixed and float) is at most 0.50 m."""
     m = graded(name)
     assert m["p95"] <= MAX_ALL_P95_M, f"95th percentile error {m['p95']:.3f} m > {MAX_ALL_P95_M}"
+
+
+def session_test(check, session):
+    def test():
+        check(session)
+
+    return test
+
+
+# Unique pytest names preserve all session outcomes in the pinned CTRF reporter.
+for session in SESSIONS:
+    for check in (check_solution_format, check_fix_rate, check_fixed_integrity,
+                  check_fixed_precision, check_overall_accuracy):
+        metric = check.__name__.removeprefix("check_")
+        globals()[f"test_{metric}_{session}"] = session_test(check, session)

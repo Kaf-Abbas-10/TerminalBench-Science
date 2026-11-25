@@ -4,7 +4,7 @@ set -eu
 cd /tests
 mkdir -p /logs/verifier
 set +e
-pytest -q test_solution.py
+pytest -q test_solution.py --ctrf /logs/verifier/ctrf.json
 status=$?
 if [ "$status" -eq 0 ]; then
   echo 1 > /logs/verifier/reward.txt
