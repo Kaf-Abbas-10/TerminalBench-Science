@@ -1,0 +1,64 @@
+{
+  "candidate_structures": [
+    {"name": "acetaminophen", "formula": "C8H9NO2", "smiles": "CC(=O)NC1=CC=C(O)C=C1"},
+    {"name": "acetaminophen sulfate", "formula": "C8H9NO5S", "smiles": "CC(=O)NC1=CC=C(OS(=O)(=O)O)C=C1"},
+    {"name": "acetaminophen glucuronide", "formula": "C14H17NO8"}
+  ],
+  "spectra": [
+    {
+      "record_id": "MSBNK-Eawag-EQ01152501", "compound_label": "unknown A",
+      "precursor_formula": "C8H10NO5S+", "precursor_mz": 232.0274,
+      "ion_mode": "positive", "collision_energy": "15% nominal HCD",
+      "source_license": "CC BY-SA", "peaks": [
+        {"mz": 232.0274, "relative_intensity": 999},
+        {"mz": 152.0706, "relative_intensity": 342}
+      ]
+    },
+    {
+      "record_id": "MSBNK-Eawag-EQ01152502", "compound_label": "unknown A",
+      "precursor_formula": "C8H10NO5S+", "precursor_mz": 232.0274,
+      "ion_mode": "positive", "collision_energy": "30% nominal HCD",
+      "source_license": "CC BY-SA", "peaks": [
+        {"mz": 152.0705, "relative_intensity": 999},
+        {"mz": 232.0274, "relative_intensity": 184},
+        {"mz": 110.0601, "relative_intensity": 34}
+      ]
+    },
+    {
+      "record_id": "MSBNK-Eawag-EA024301", "compound_label": "candidate reference",
+      "precursor_formula": "C8H10NO2+", "precursor_mz": 152.0706,
+      "ion_mode": "positive", "collision_energy": "35% nominal CID",
+      "source_license": "CC BY", "peaks": [
+        {"mz": 110.0601, "relative_intensity": 409},
+        {"mz": 111.0439, "relative_intensity": 5},
+        {"mz": 134.0601, "relative_intensity": 13},
+        {"mz": 152.0707, "relative_intensity": 999}
+      ]
+    },
+    {
+      "record_id": "MSBNK-Athens_Univ-AU276706", "compound_label": "candidate reference",
+      "precursor_formula": "C8H10NO2+", "precursor_mz": 152.0706,
+      "ion_mode": "positive", "collision_energy": "ramp 16.3-24.4 eV",
+      "source_license": "CC BY", "peaks": [
+        {"mz": 59.0487, "relative_intensity": 33},
+        {"mz": 65.0378, "relative_intensity": 167},
+        {"mz": 66.0412, "relative_intensity": 8},
+        {"mz": 67.0412, "relative_intensity": 6},
+        {"mz": 67.0541, "relative_intensity": 9},
+        {"mz": 80.0494, "relative_intensity": 5},
+        {"mz": 82.0647, "relative_intensity": 36},
+        {"mz": 92.0496, "relative_intensity": 66},
+        {"mz": 93.0335, "relative_intensity": 29},
+        {"mz": 93.0552, "relative_intensity": 8},
+        {"mz": 109.0515, "relative_intensity": 9},
+        {"mz": 110.0613, "relative_intensity": 464},
+        {"mz": 111.0450, "relative_intensity": 100},
+        {"mz": 112.0476, "relative_intensity": 5},
+        {"mz": 134.0588, "relative_intensity": 65},
+        {"mz": 135.0618, "relative_intensity": 8},
+        {"mz": 152.0693, "relative_intensity": 999},
+        {"mz": 153.0729, "relative_intensity": 116}
+      ]
+    }
+  ]
+}
